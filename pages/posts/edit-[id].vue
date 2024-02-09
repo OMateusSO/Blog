@@ -1,57 +1,65 @@
-<script>
+<script setup lang="ts">
 import axios from "axios";
-import { ref, reactive} from 'vue';
 
-
-const Post = {
-  title: '',
-  datetime: new Date().toISOString().split('T')[0],
+const post = ref<any>({
   category: {
     title: '',
   },
-  description: '',
-  content: '',
-};
+});
 
-const post = ref(reactive({ ...Post }));
+const route = useRoute();
+const router = useRouter();
 
-export default {
-  setup() {
-    const router = useRouter();
+onMounted(() => {
+  sendGetById(route.params.id);
+});
 
-    function sendCreatePosts() {
-      axios
-        .post(`http://localhost:3030/posts/`, post.value)
-        .then(() => {
-          console.log("success");
-          router.back();
-          resetPost();
-        })
-        .catch(() => {
-          console.log("error");
-        });
-    }
+function sendGetById(id: any) {
+  axios
+    .get(`http://localhost:3030/posts/${id}`)
+    .then((resp) => {
+      post.value = resp.data;
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
 
-    function resetPost() {
-      post.value = {
-        ...Post,
-        category: {},
-      };
-    }
+function clickSalvar() {
+  sendUpdatePosts();
+}
 
-    return {
-      post,
-      sendCreatePosts,
-    };
-  },
-};
+function sendUpdatePosts() {
+  axios
+    .put(`http://localhost:3030/posts/${route.params.id}`, post.value)
+    .then(() => {
+      console.log("success");
+      router.push("/");
+    })
+    .catch(() => {
+      console.log("error");
+    });
+}
+
+function clickDeletar() {
+  sendDeletePosts();
+}
+
+function sendDeletePosts() {
+  axios
+    .delete(`http://localhost:3030/posts/${route.params.id}`)
+    .then(() => {
+      console.log("success");
+      router.push("/");
+    })
+    .catch(() => {
+      console.log("error");
+    });
+}
 </script>
 
 <template>
-    <div class="mx-auto max-w-2xl lg:max-w-4xl mt-8">
-        <div class="mx-auto max-w-2xl lg:max-w-4xl mt-8">
-    <div class="font-semibold text-3xl my-10">Novo post</div>
-
+  <div class="mx-auto max-w-2xl lg:max-w-4xl mt-8">
     <div>
       <label
         for="email"
@@ -67,7 +75,7 @@ export default {
       </div>
     </div>
 
-    <div>
+     <div>
       <label
         for="email"
         class="block text-sm font-medium leading-6 text-gray-900"
@@ -80,9 +88,10 @@ export default {
           v-model="post.category.title"
         />
       </div>
-    </div>
+    </div> 
 
-    
+
+
     <div>
       <label class="block text-sm font-medium leading-6 text-gray-900"
         >Descrição</label
@@ -115,13 +124,20 @@ export default {
   <div class="flex flex-row-reverse mx-auto max-w-2xl lg:max-w-4xl mt-8 mb-8">
     <button
       type="button"
-      class="rounded-md bg-indigo-600 px-2.5 px-2 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-      @click="sendCreatePosts"
+      class="rounded-md bg-indigo-600 px-2.5 mx-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+      @click="clickSalvar"
     >
       Salvar
     </button>
+
+    <button
+      type="button"
+      class="rounded-md ml-4 bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+      @click="clickDeletar"
+    >
+      Deletar
+    </button>
   </div>
-    </div>
 </template>
 
 <style></style>
