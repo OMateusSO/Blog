@@ -1,7 +1,8 @@
 
 <script setup lang="ts">
 import axios from 'axios';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted } from 'vue';
+import { baseURL } from '@/config/config';
 
 const posts = ref<Array<any>>([]);
 
@@ -11,7 +12,7 @@ onMounted(() => {
 
 function sendGetallPosts() {
   axios
-    .get('http://localhost:3030/posts')
+    .get(`${baseURL}/posts`)
     .then((resposta) => {
       posts.value = resposta.data;
     })
@@ -19,6 +20,11 @@ function sendGetallPosts() {
       console.log('error');
     });
 }
+
+const invertDate = (dateString: string): string => {
+  const parts = dateString.split('-');
+  return parts.reverse().join('-');
+};
 
 const emits = defineEmits(["onClickPost"]);
 
@@ -42,11 +48,11 @@ function clickPost(post: any) {
         <article v-for="post in posts" :key="post.id" class="flex max-w-xl flex-col items-start justify-between">
           <div @click="clickPost(post)">
             <div class="flex items-center gap-x-4 text-xs">
-              <time :datetime="post.datetime" class="text-gray-500">{{ post.datetime }}</time>
-              <a :href="post.category.href"
+              <time :createAt="invertDate(post.createAt.split('T')[0])" class="text-gray-500">{{ invertDate(post.createAt.split('T')[0]) }}</time>
+              <a :href="post.category"
                 class="relative z-10 rounded-full bg-gray-50 px-3 py-1.5 font-medium text-gray-600 hover:bg-gray-100 hover:cursor-pointer"
                 @click.prevent>
-                {{ post.category.title }}
+                {{ post.category }}
               </a>
             </div>
             <div class="group relative">
@@ -60,6 +66,8 @@ function clickPost(post: any) {
             </div>
           </div>
         </article>
+        <div class="flex flex-row-reverse mx-auto max-w-2xl lg:max-w-4xl mt-8">
+        </div>
       </div>
     </div>
   </div>

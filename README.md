@@ -35,8 +35,5 @@ Build the application for production:
 # npm
 npm run dev
 
-# json-server na porta 3030
-npx json-server db/db.json --port 3030
-
 ```
 

@@ -1,0 +1,223 @@
+{
+  "resolvedId": "C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/[id].vue?macro=true",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup lang=\"ts\">\r\n    import axios from 'axios';\r\n    import { ref, onMounted } from 'vue'\r\n    import { baseURL } from '@/config/config';\r\n\r\n\r\n    const route = useRoute();\r\n    const post = ref<any>({});\r\n\r\n    onMounted(() => {\r\n        sendGetById(route.params.id as string);\r\n    })\r\n\r\n    function sendGetById(id : any) {\r\n        axios\r\n            .get(`${baseURL}/posts/${id}`)\r\n            .then((resposta) => {\r\n              post.value = resposta.data;\r\n            })\r\n            .catch(() => {\r\n                console.log('error');\r\n            });\r\n    } \r\n</script>\r\n\r\n\r\n<template>\r\n    <div class=\"flex flex-row-reverse mx-auto max-w-2xl lg:max-w-3xl mt-8\">  \r\n    <button\r\n      type=\"button\"\r\n      class=\"rounded-md bg-indigo-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600\"\r\n      @click=\"$router.push(`/posts/edit-${$route.params.id}`)\"\r\n    >\r\n      Editar\r\n    </button>\r\n  </div>\r\n  <div class=\"bg-white px-6 py-31 lg:px-8\">\r\n    <div class=\"mx-auto max-w-3xl text-base leading-7 text-gray-700\">\r\n      <p class=\"text-base font-semibold leading-7 text-indigo-600\">\r\n        {{ post.category }} \r\n      </p>\r\n      <h1\r\n        class=\"mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl\"\r\n      >\r\n        {{ post.title }}\r\n      </h1>\r\n      <p class=\"mt-6 text-xl  leading-8\">\r\n        {{ post.description }}\r\n      </p>\r\n      <div class=\"mt-10 text-justify max-w-2xl\">\r\n        <p>\r\n          {{ post.content }}\r\n        </p>\r\n      </div>\r\n      <div>\r\n        <p class=\"flex flex-row-reverse text-x1 leading-8\">\r\n          {{ post.createAt ? post.createAt.split('T')[0] : 'Data não disponível' }}\r\n        </p>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</template>\r\n  \r\n  <style></style>\r\n\r\n<style></style>",
+      "start": 1708831985296,
+      "end": 1708831985765,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1708831985765,
+      "end": 1708831985765,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import _sfc_main from \"C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/[id].vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/[id].vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
+      "start": 1708831985765,
+      "end": 1708831986267,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1708831986268,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1708831986269,
+      "end": 1708831986270,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1708831986271,
+      "end": 1708831986271,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "result": "export { default } from \"C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/[id].vue?macro=true&vue&type=script&setup=true&lang.ts\"",
+      "start": 1708831986271,
+      "end": 1708831986272,
+      "order": "post",
+      "sourcemaps": {
+        "version": 3,
+        "sources": [
+          ""
+        ],
+        "names": [],
+        "mappings": "AAAA"
+      }
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1708831986275,
+      "end": 1708831986275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1708831986275,
+      "end": 1708831986275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1708831986275,
+      "end": 1708831986275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1708831986275,
+      "end": 1708831986276,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1708831986276,
+      "end": 1708831986276,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1708831986276,
+      "end": 1708831986276,
+      "order": "normal"
+    }
+  ]
+}

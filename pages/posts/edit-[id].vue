@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import axios from "axios";
+import { baseURL } from '@/config/config';
+
 
 const post = ref<any>({
   category: {
@@ -16,7 +18,7 @@ onMounted(() => {
 
 function sendGetById(id: any) {
   axios
-    .get(`http://localhost:3030/posts/${id}`)
+    .get(`${baseURL}/posts/${id}`)
     .then((resp) => {
       post.value = resp.data;
     })
@@ -31,7 +33,7 @@ function clickSalvar() {
 
 function sendUpdatePosts() {
   axios
-    .put(`http://localhost:3030/posts/${route.params.id}`, post.value)
+    .put(`${baseURL}/posts/${route.params.id}`, post.value)
     .then(() => {
       console.log("success");
       router.push("/");
@@ -47,7 +49,7 @@ function clickDeletar() {
 
 function sendDeletePosts() {
   axios
-    .delete(`http://localhost:3030/posts/${route.params.id}`)
+    .delete(`${baseURL}/posts/${route.params.id}`)
     .then(() => {
       console.log("success");
       router.push("/");
@@ -85,7 +87,7 @@ function sendDeletePosts() {
         <input
           class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-2"
           placeholder="Categoria"
-          v-model="post.category.title"
+          v-model="post.category"
         />
       </div>
     </div> 

@@ -1,6 +1,8 @@
 <script setup lang="ts">
     import axios from 'axios';
     import { ref, onMounted } from 'vue'
+    import { baseURL } from '@/config/config';
+
 
     const route = useRoute();
     const post = ref<any>({});
@@ -9,18 +11,18 @@
         sendGetById(route.params.id as string);
     })
 
-    function sendGetById(id : string) {
+    function sendGetById(id : any) {
         axios
-            .get(`http://localhost:3030/posts/${id}`)
+            .get(`${baseURL}/posts/${id}`)
             .then((resposta) => {
-            console.log(resposta.data);
-            post.value = resposta.data;
+              post.value = resposta.data;
             })
             .catch(() => {
                 console.log('error');
             });
-    }
+    } 
 </script>
+
 
 <template>
     <div class="flex flex-row-reverse mx-auto max-w-2xl lg:max-w-3xl mt-8">  
@@ -35,7 +37,7 @@
   <div class="bg-white px-6 py-31 lg:px-8">
     <div class="mx-auto max-w-3xl text-base leading-7 text-gray-700">
       <p class="text-base font-semibold leading-7 text-indigo-600">
-        {{ post.category?.title }} 
+        {{ post.category }} 
       </p>
       <h1
         class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
@@ -52,7 +54,7 @@
       </div>
       <div>
         <p class="flex flex-row-reverse text-x1 leading-8">
-          {{ post.datetime }}
+          {{ post.createAt ? post.createAt.split('T')[0] : 'Data não disponível' }}
         </p>
       </div>
     </div>

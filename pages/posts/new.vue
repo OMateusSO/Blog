@@ -1,14 +1,13 @@
 <script>
 import axios from "axios";
 import { ref, reactive} from 'vue';
+import { baseURL } from '@/config/config';
 
 
 const Post = {
   title: '',
-  datetime: new Date().toISOString().split('T')[0],
-  category: {
-    title: '',
-  },
+  DateTime: new Date().toISOString().split('T')[0],
+  category:'',
   description: '',
   content: '',
 };
@@ -21,7 +20,7 @@ export default {
 
     function sendCreatePosts() {
       axios
-        .post(`http://localhost:3030/posts/`, post.value)
+        .post(`${baseURL}/posts`, post.value)
         .then(() => {
           console.log("success");
           router.back();
@@ -35,7 +34,6 @@ export default {
     function resetPost() {
       post.value = {
         ...Post,
-        category: {},
       };
     }
 
@@ -77,7 +75,7 @@ export default {
         <input
           class="block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-2"
           placeholder="Categoria"
-          v-model="post.category.title"
+          v-model="post.category"
         />
       </div>
     </div>

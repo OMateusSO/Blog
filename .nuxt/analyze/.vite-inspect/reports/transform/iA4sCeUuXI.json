@@ -1,0 +1,214 @@
+{
+  "resolvedId": "C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/edit-[id].vue",
+  "transforms": [
+    {
+      "name": "vite:load-fallback",
+      "result": "<script setup lang=\"ts\">\r\nimport axios from \"axios\";\r\nimport { baseURL } from '@/config/config';\r\n\r\n\r\nconst post = ref<any>({\r\n  category: {\r\n    title: '',\r\n  },\r\n});\r\n\r\nconst route = useRoute();\r\nconst router = useRouter();\r\n\r\nonMounted(() => {\r\n  sendGetById(route.params.id);\r\n});\r\n\r\nfunction sendGetById(id: any) {\r\n  axios\r\n    .get(`${baseURL}/posts/${id}`)\r\n    .then((resp) => {\r\n      post.value = resp.data;\r\n    })\r\n    .catch((error) => {\r\n      console.log(error);\r\n    });\r\n}\r\n\r\nfunction clickSalvar() {\r\n  sendUpdatePosts();\r\n}\r\n\r\nfunction sendUpdatePosts() {\r\n  axios\r\n    .put(`${baseURL}/posts/${route.params.id}`, post.value)\r\n    .then(() => {\r\n      console.log(\"success\");\r\n      router.push(\"/\");\r\n    })\r\n    .catch(() => {\r\n      console.log(\"error\");\r\n    });\r\n}\r\n\r\nfunction clickDeletar() {\r\n  sendDeletePosts();\r\n}\r\n\r\nfunction sendDeletePosts() {\r\n  axios\r\n    .delete(`${baseURL}/posts/${route.params.id}`)\r\n    .then(() => {\r\n      console.log(\"success\");\r\n      router.push(\"/\");\r\n    })\r\n    .catch(() => {\r\n      console.log(\"error\");\r\n    });\r\n}\r\n</script>\r\n\r\n<template>\r\n  <div class=\"mx-auto max-w-2xl lg:max-w-4xl mt-8\">\r\n    <div>\r\n      <label\r\n        for=\"email\"\r\n        class=\"block text-sm font-medium leading-6 text-gray-900\"\r\n        >Titulo</label\r\n      >\r\n      <div class=\"mt-2\">\r\n        <input\r\n          class=\"block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-2\"\r\n          placeholder=\"titulo\"\r\n          v-model=\"post.title\"\r\n        />\r\n      </div>\r\n    </div>\r\n\r\n     <div>\r\n      <label\r\n        for=\"email\"\r\n        class=\"block text-sm font-medium leading-6 text-gray-900\"\r\n        >Categoria</label\r\n      >\r\n      <div class=\"mt-2\">\r\n        <input\r\n          class=\"block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-2\"\r\n          placeholder=\"Categoria\"\r\n          v-model=\"post.category\"\r\n        />\r\n      </div>\r\n    </div> \r\n\r\n\r\n\r\n    <div>\r\n      <label class=\"block text-sm font-medium leading-6 text-gray-900\"\r\n        >Descrição</label\r\n      >\r\n      <div class=\"mt-2\">\r\n        <textarea\r\n          class=\"block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-2\"\r\n          placeholder=\"Descrição\"\r\n          v-model=\"post.description\"\r\n        >\r\n        </textarea>\r\n      </div>\r\n    </div>\r\n\r\n    <div>\r\n      <label class=\"block text-sm font-medium leading-6 text-gray-900\"\r\n        >Conteudo</label\r\n      >\r\n      <div class=\"mt-2\">\r\n        <textarea\r\n          class=\"block w-full rounded-md border-0 px-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-2\"\r\n          placeholder=\"Conteudo\"\r\n          v-model=\"post.content\"\r\n          rows=\"15\"\r\n        >\r\n        </textarea>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"flex flex-row-reverse mx-auto max-w-2xl lg:max-w-4xl mt-8 mb-8\">\r\n    <button\r\n      type=\"button\"\r\n      class=\"rounded-md bg-indigo-600 px-2.5 mx-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600\"\r\n      @click=\"clickSalvar\"\r\n    >\r\n      Salvar\r\n    </button>\r\n\r\n    <button\r\n      type=\"button\"\r\n      class=\"rounded-md ml-4 bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600\"\r\n      @click=\"clickDeletar\"\r\n    >\r\n      Deletar\r\n    </button>\r\n  </div>\r\n</template>\r\n\r\n<style></style>",
+      "start": 1708831985305,
+      "end": 1708831985815,
+      "sourcemaps": null
+    },
+    {
+      "name": "nuxt:layer-aliasing",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:server-devonly:transform",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "pre"
+    },
+    {
+      "name": "nuxt:client-fallback-auto-id",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "pre"
+    },
+    {
+      "name": "vite:css",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "normal"
+    },
+    {
+      "name": "vite:esbuild",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "normal"
+    },
+    {
+      "name": "vite:json",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker",
+      "start": 1708831985815,
+      "end": 1708831985815,
+      "order": "normal"
+    },
+    {
+      "name": "vite:vue",
+      "result": "import _sfc_main from \"C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/edit-[id].vue?vue&type=script&setup=true&lang.ts\";\nexport * from \"C:/Users/MCDL/Documents/MAUS/Blog/pages/posts/edit-[id].vue?vue&type=script&setup=true&lang.ts\";\nexport default _sfc_main;\n",
+      "start": 1708831985815,
+      "end": 1708831986267,
+      "order": "normal",
+      "sourcemaps": {
+        "mappings": ""
+      }
+    },
+    {
+      "name": "vite:vue-jsx",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:remove-plugin-metadata",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:chunk-error",
+      "start": 1708831986267,
+      "end": 1708831986267,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:components:imports",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "replace",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "ssr-styles",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "vite:define",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "vite:css-post",
+      "start": 1708831986268,
+      "end": 1708831986268,
+      "order": "normal"
+    },
+    {
+      "name": "vite:build-html",
+      "start": 1708831986268,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:worker-import-meta-url",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:asset-import-meta-url",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "commonjs",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:dynamic-import-vars",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "vite:import-glob",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "normal"
+    },
+    {
+      "name": "nuxt:composable-keys",
+      "start": 1708831986269,
+      "end": 1708831986269,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:imports-transform",
+      "start": 1708831986269,
+      "end": 1708831986270,
+      "order": "post"
+    },
+    {
+      "name": "unctx:transform",
+      "start": 1708831986271,
+      "end": 1708831986271,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:pages-macros-transform",
+      "start": 1708831986271,
+      "end": 1708831986272,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:runtime-paths-dep",
+      "start": 1708831986275,
+      "end": 1708831986275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:route-injection-plugin",
+      "start": 1708831986275,
+      "end": 1708831986275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:components-loader",
+      "start": 1708831986275,
+      "end": 1708831986275,
+      "order": "post"
+    },
+    {
+      "name": "nuxt:tree-shake-composables:transform",
+      "start": 1708831986275,
+      "end": 1708831986276,
+      "order": "post"
+    },
+    {
+      "name": "vite:build-import-analysis",
+      "start": 1708831986276,
+      "end": 1708831986276,
+      "order": "normal"
+    },
+    {
+      "name": "vite:reporter",
+      "start": 1708831986276,
+      "end": 1708831986276,
+      "order": "normal"
+    }
+  ]
+}
